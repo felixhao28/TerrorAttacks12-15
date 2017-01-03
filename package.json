@@ -4,6 +4,7 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
+    "start": "http-server -a localhost -p 8081 -c-1",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -27,6 +28,7 @@
     "eslint-plugin-babel": "^4.0.0",
     "isparta-instrumenter-loader": "^1.0.1",
     "json-loader": "^0.5.4",
+    "minimist": "^1.2.0",
     "node-sass": "^3.13.0",
     "null-loader": "^0.1.1",
     "sass-loader": "^4.0.2",
