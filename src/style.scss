@@ -1,0 +1,51 @@
+.main-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#container1 {
+    width: 500px;
+    height: 600px;
+    position: relative;
+    circle[r='10'] {
+        z-index: 99;
+    }
+}
+
+#countryStat {
+    padding-top: 20px;
+    rect {
+        fill: steelblue;
+        &:hover {
+            fill: #aec7e8;
+        }
+    }
+    .value {
+        fill: white;
+        font: 10px sans-serif;
+        text-anchor: middle;
+    }
+    .label {
+        font: 14px sans-serif;
+        text-anchor: middle;
+    }
+    .axis {
+        font: 10px sans-serif;
+    }
+    .axis path,
+    .axis line {
+        fill: none;
+        stroke: #000;
+        shape-rendering: crispEdges;
+    }
+}
+
+#sunburst {
+    .label {
+        font: 14px sans-serif;
+        text-anchor: middle;
+    }
+    path:hover {
+        opacity: 0.5;
+    }
+}
