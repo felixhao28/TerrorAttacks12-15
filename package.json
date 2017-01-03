@@ -29,7 +29,7 @@
     "isparta-instrumenter-loader": "^1.0.1",
     "json-loader": "^0.5.4",
     "minimist": "^1.2.0",
-    "node-sass": "^3.13.0",
+    "node-sass": "^4.1.1",
     "null-loader": "^0.1.1",
     "sass-loader": "^4.0.2",
     "scss-loader": "0.0.1",
