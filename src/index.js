@@ -205,7 +205,7 @@ $(function () {
 
 let sunburstData = {};
 let sunburstSum = {};
-let sunburstOrder = 'Scenario';
+let sunburstOrder = 'Weapon';
 function updateSunburst() {
   sunburstData = {};
   for (const {Weapon, Scenario, count} of scenarioVsWeaponData) {
@@ -229,8 +229,17 @@ function updateSunburst() {
 
 var w = 900,
   h = 900,
-  r = Math.min(w, h) / 2,
-  color = d3.scale.category20c();
+  r = Math.min(w, h) / 2;
+
+var d3color = d3.scale.category20();
+
+function color(key, i) {
+  switch (key) {
+    case 'Explosives/Bombs/Dynamite':
+      return '#d62728';
+  }
+  return d3color(key, i);
+}
 
 var vis = d3.select('#sunburst').append('svg:svg')
   .attr('width', w)
