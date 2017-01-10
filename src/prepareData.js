@@ -48,31 +48,31 @@ fs.writeFileSync('./bigAttacks.json', JSON.stringify({bigAttacks}), 'utf-8');
 
 const scenarioVsWeapon = {};
 for (let i = 0;i < rows.data.length;i++) {
-  let {Weapon, Scenario} = rows.data[i];
+  let {Weapon, Target} = rows.data[i];
 
-  if (Scenario === '.' || !Scenario) {
-    Scenario = 'Unknown';
+  if (Target === '.' || !Target) {
+    Target = 'Unknown';
   }
 
   if (!Weapon) {
     Weapon = 'Unknown';
   }
 
-  if (!(Scenario in scenarioVsWeapon)) {
-    scenarioVsWeapon[Scenario] = {};
+  if (!(Target in scenarioVsWeapon)) {
+    scenarioVsWeapon[Target] = {};
   }
-  if (!(Weapon in scenarioVsWeapon[Scenario])) {
-    scenarioVsWeapon[Scenario][Weapon] = 0;
+  if (!(Weapon in scenarioVsWeapon[Target])) {
+    scenarioVsWeapon[Target][Weapon] = 0;
   }
-  scenarioVsWeapon[Scenario][Weapon]++;
+  scenarioVsWeapon[Target][Weapon]++;
 }
 const scenarioVsWeaponData = [];
-for (let scenario in scenarioVsWeapon) {
-  for (let weapon in scenarioVsWeapon[scenario]) {
+for (let target in scenarioVsWeapon) {
+  for (let weapon in scenarioVsWeapon[target]) {
     scenarioVsWeaponData.push({
-      Scenario: scenario,
+      Target: target,
       Weapon: weapon,
-      count: scenarioVsWeapon[scenario][weapon]
+      count: scenarioVsWeapon[target][weapon]
     });
   }
 }

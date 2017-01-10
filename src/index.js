@@ -208,20 +208,20 @@ let sunburstSum = {};
 let sunburstOrder = 'Weapon';
 function updateSunburst() {
   sunburstData = {};
-  for (const {Weapon, Scenario, count} of scenarioVsWeaponData) {
-    if (sunburstOrder === 'Scenario') {
-      if (!(Scenario in sunburstData)) {
-        sunburstData[Scenario] = {};
-        sunburstSum[Scenario] = 0;
+  for (const {Weapon, Target, count} of scenarioVsWeaponData) {
+    if (sunburstOrder === 'Target') {
+      if (!(Target in sunburstData)) {
+        sunburstData[Target] = {};
+        sunburstSum[Target] = 0;
       }
-      sunburstData[Scenario][Weapon] = count;
-      sunburstSum[Scenario] += count;
+      sunburstData[Target][Weapon] = count;
+      sunburstSum[Target] += count;
     } else {
       if (!(Weapon in sunburstData)) {
         sunburstData[Weapon] = {};
         sunburstSum[Weapon] = 0;
       }
-      sunburstData[Weapon][Scenario] = count;
+      sunburstData[Weapon][Target] = count;
       sunburstSum[Weapon] += count;
     }
   }
@@ -234,12 +234,15 @@ var w = 900,
 var d3color = d3.scale.category20();
 
 function color(key, i) {
+  console.log(key);
   switch (key) {
     case 'Explosives/Bombs/Dynamite':
       return '#d62728';
   }
   return d3color(key, i);
 }
+
+function drawSunburst() {
 
 var vis = d3.select('#sunburst').append('svg:svg')
   .attr('width', w)
@@ -273,7 +276,7 @@ var g = vis.data(d3.entries({sunburstData})).selectAll('g')
 g.append('svg:path')
   .attr('d', arc)
   .attr('stroke', '#fff')
-  .attr('fill', function (d) { return color((d.children ? d : d.parent).key); })
+  .attr('fill', function (d) { return color(d.key); })
   .attr('fill-rule', 'evenodd')
   .on('mouseover', function (d) {
     vis.selectAll('text.label').text(d.key + ': ' + (sunburstSum[d.key] || d.value));
@@ -285,3 +288,18 @@ vis.append('svg:text')
   .attr('y', 0)
   .attr('dy', '.75em')
   .text('...');
+}
+
+drawSunburst();
+
+$('#sunburst-toggle').click(function () {
+  if (sunburstOrder === 'Target') {
+    sunburstOrder = 'Weapon';
+    $(this).text('Inner circle: Weapon');
+  } else {
+    sunburstOrder = 'Target';
+    $(this).text('Inner circle: Target');
+  }
+  d3.select('#sunburst > svg').remove();
+  drawSunburst();
+});
