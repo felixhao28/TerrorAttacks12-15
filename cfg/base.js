@@ -12,8 +12,6 @@ let additionalPaths = [];
 module.exports = {
   additionalPaths: additionalPaths,
   port: defaultSettings.port,
-  debug: true,
-  devtool: 'eval',
   output: {
     path: path.join(__dirname, '/../dist'),
     filename: 'app.js',

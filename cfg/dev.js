@@ -12,6 +12,7 @@ let config = Object.assign({}, baseConfig, {
   entry: path.join(__dirname, '../src/index'),
   cache: true,
   devtool: 'source-map',
+  debug: true,
   plugins: [
     new webpack.NoErrorsPlugin(),
     new BowerWebpackPlugin({
