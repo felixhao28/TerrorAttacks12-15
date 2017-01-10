@@ -233,13 +233,24 @@ var w = 900,
 
 var d3color = d3.scale.category20();
 
-function color(key, i) {
-  console.log(key);
+const legendsData = {};
+
+function _color(key, i) {
   switch (key) {
     case 'Explosives/Bombs/Dynamite':
       return '#d62728';
   }
   return d3color(key, i);
+}
+
+function clsName(key) {
+  return key.replace(/[/ &()]/g, '-');
+}
+
+function color(key, i) {
+  const c = _color(key, i);
+  legendsData[key] = c;
+  return c;
 }
 
 function drawSunburst() {
@@ -280,6 +291,8 @@ g.append('svg:path')
   .attr('fill-rule', 'evenodd')
   .on('mouseover', function (d) {
     vis.selectAll('text.label').text(d.key + ': ' + (sunburstSum[d.key] || d.value));
+    $('.legend.active').removeClass('active');
+    $(`.legend-${clsName(d.key)}`).addClass('active');
   });
 
 vis.append('svg:text')
@@ -303,3 +316,8 @@ $('#sunburst-toggle').click(function () {
   d3.select('#sunburst > svg').remove();
   drawSunburst();
 });
+
+console.log(legendsData);
+for (let key in legendsData) {
+  $('#sunburst_legends').append(`<div class="legend legend-${clsName(key)}" style="background-color:${legendsData[key]};width:100px;height:50px;">${key}</div>`);
+}

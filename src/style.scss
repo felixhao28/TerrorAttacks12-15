@@ -49,3 +49,9 @@
         opacity: 0.5;
     }
 }
+
+.legend.active {
+    border-style: solid;
+    border-width: 2px;
+    box-sizing: border-box;
+}

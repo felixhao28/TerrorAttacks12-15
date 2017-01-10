@@ -66,6 +66,7 @@ for (let i = 0;i < rows.data.length;i++) {
   }
   scenarioVsWeapon[Target][Weapon]++;
 }
+
 const scenarioVsWeaponData = [];
 for (let target in scenarioVsWeapon) {
   for (let weapon in scenarioVsWeapon[target]) {
